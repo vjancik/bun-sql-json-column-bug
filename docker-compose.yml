@@ -1,0 +1,16 @@
+name: json-bug-repro
+
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: repro
+      POSTGRES_PASSWORD: repro
+      POSTGRES_DB: repro
+    ports:
+      - "5499:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U repro -d repro"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
